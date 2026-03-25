@@ -1,1 +1,28 @@
-{}
+{
+    "listino": [
+        {
+            "id": "1",
+            "titolo": "aaa",
+            "immagine": "",
+            "descrizione": "aaaaa",
+            "quantita": 30,
+            "prezzo": 55.99
+        },
+        {
+            "id": "1",
+            "titolo": "bbb",
+            "immagine": "",
+            "descrizione": "bbbb",
+            "quantita": 25,
+            "prezzo": 30.99
+        },
+        {
+            "id": "1",
+            "titolo": "ccc",
+            "immagine": "",
+            "descrizione": "cccc",
+            "quantita": 5,
+            "prezzo": 20.99
+        }
+    ]
+}
