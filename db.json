@@ -1,28 +1,26 @@
-{
-    "catalog": [
-        {
-            "id": 1,
-            "title": "Monitor",
-            "picture": "img/monitor.png",
-            "description": "24 pollici, risoluzione FHD, 60 Hz",
-            "quantity": 30,
-            "price": 77.99
-        },
-        {
-            "id": 2,
-            "title": "Mouse",
-            "picture": "img/mouse.png",
-            "description": "USB con 3 bottoni e rotellina di scorrimento",
-            "quantity": 25,
-            "price": 6.99
-        },
-        {
-            "id": 3,
-            "title": "Tastiera",
-            "picture": "img/keyboard.png",
-            "description": "tastiera QWERTY con layout italiano",
-            "quantity": 15,
-            "price": 10.99
-        }
-    ]
-}
+[
+    {
+        "id": 1,
+        "title": "Monitor",
+        "picture": "img/monitor.png",
+        "description": "24 pollici, risoluzione FHD, 60 Hz",
+        "quantity": 30,
+        "price": 77.99
+    },
+    {
+        "id": 2,
+        "title": "Mouse",
+        "picture": "img/mouse.png",
+        "description": "USB con 3 bottoni e rotellina di scorrimento",
+        "quantity": 25,
+        "price": 6.99
+    },
+    {
+        "id": 3,
+        "title": "Tastiera",
+        "picture": "img/keyboard.png",
+        "description": "tastiera QWERTY con layout italiano",
+        "quantity": 15,
+        "price": 10.99
+    }
+]

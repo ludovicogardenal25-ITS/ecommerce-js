@@ -1,7 +1,11 @@
 "use strict";
 
 // carrello del cliente
-const basket = [];
+const preBasket = localStorage.getItem("userBasket");
+const basket = preBasket ? JSON.parse(localStorage.getItem("userBasket")) : [];
+
+// catalogo dei prodotti
+const preCatalog = localStorage.getItem("updatedCatalog");
 
 // rappresenta la lista di prodotti nell'HTML
 const productList = document.getElementById("product-list");
@@ -10,8 +14,9 @@ startApp();
 
 // inizializza l'applicazione
 async function startApp() {
-    const db = await loadDatabase();
-    for (let item of db.catalog) {
+    const db = preCatalog ? JSON.parse(localStorage.getItem("updatedCatalog")) : await loadDatabase();
+    console.log(db);
+    for (let item of db) {
         const div = document.createElement("div");
         div.innerHTML = `
             <img src="${item.picture}" width="200" height="100">
@@ -46,7 +51,7 @@ async function startApp() {
                 if (it.id === item.id) {
                     // elemento già presente: aggiorno la quantità
                     found = true;
-                    for (let i of db.catalog) {
+                    for (let i of db) {
                         if (i.id === item.id && i.quantity >= item.quantity) {
                             // aggiorna carrello
                             it.quantity += item.quantity;
@@ -59,7 +64,7 @@ async function startApp() {
             }
             if (!found) {
                 // elemento non presente: lo inserisco nel carrello
-                for (let i of db.catalog) {
+                for (let i of db) {
                     if (i.id === item.id && i.quantity >= item.quantity) {
                         // aggiorna carrello
                         basket.push(item);
@@ -69,7 +74,7 @@ async function startApp() {
                 }
             }
             // aggiorna quantità nell'HTML
-            for (let i of db.catalog) {
+            for (let i of db) {
                 if (i.id === item.id) {
                     document.getElementById(`quantity-${item.id}`).innerText = `Quantità: ${i.quantity}`;
                     document.getElementById(`customerQuantity-${item.id}`).setAttribute("max", i.quantity);
@@ -77,9 +82,8 @@ async function startApp() {
             }
 
             // salva carrello e catalog
-            console.log(JSON.stringify(basket));
             localStorage.setItem("userBasket", JSON.stringify(basket));
-            localStorage.setItem("updatedCatalog", JSON.stringify(db.catalog));
+            localStorage.setItem("updatedCatalog", JSON.stringify(db));
         });
     });
 }
