@@ -15,10 +15,10 @@ async function startApp() {
         const item = document.createElement("div");
         item.innerHTML = `
             <img src="${articolo.immagine}" width="200" height="100">
-            <p>${articolo.titolo}</p>
-            <p>Descrizione: ${articolo.descrizione}</p>
-            <p>Quantità: ${articolo.quantita}</p>
-            <p>Prezzo: ${articolo.prezzo} €</p>
+            <p id="title-${articolo.id}">${articolo.titolo}</p>
+            <p id="description-${articolo.id}">Descrizione: ${articolo.descrizione}</p>
+            <p id="quantity-${articolo.id}">Quantità: ${articolo.quantita}</p>
+            <p id="price-${articolo.id}"id="title-${articolo.id}">Prezzo: ${articolo.prezzo} €</p>
             <input type="number" id="customerQuantity-${articolo.id}" min="0" max="${articolo.quantita}">
             <button id="addToBasket-${articolo.id}">Aggiugi al carrello</button>
             <hr />
@@ -67,10 +67,12 @@ async function startApp() {
                     }
                 }
             }
-            console.log("--- basket ---");
-            console.log(basket);
-            console.log("--- listino ---");
-            console.log(db.listino);
+            // aggiorna quantità nell'HTML
+            for (let i of db.listino) {
+                if (i.id === item.id) {
+                    document.getElementById(`quantity-${item.id}`).innerText = `Quantità: ${i.quantita}`;
+                }
+            }
         });
     });
 }
