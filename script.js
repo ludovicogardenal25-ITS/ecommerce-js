@@ -71,6 +71,7 @@ async function startApp() {
             for (let i of db.listino) {
                 if (i.id === item.id) {
                     document.getElementById(`quantity-${item.id}`).innerText = `Quantità: ${i.quantita}`;
+                    document.getElementById(`customerQuantity-${item.id}`).setAttribute("max", i.quantita);
                 }
             }
         });
