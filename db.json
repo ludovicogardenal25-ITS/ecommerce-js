@@ -3,7 +3,7 @@
         {
             "id": 1,
             "titolo": "Monitor",
-            "immagine": "",
+            "immagine": "img/monitor.png",
             "descrizione": "24 pollici, risoluzione FHD, 60 Hz",
             "quantita": 30,
             "prezzo": 77.99
@@ -11,7 +11,7 @@
         {
             "id": 2,
             "titolo": "Mouse",
-            "immagine": "",
+            "immagine": "img/mouse.png",
             "descrizione": "USB, 3 bottoni con rotellina di scorrimento",
             "quantita": 25,
             "prezzo": 6.99
@@ -19,7 +19,7 @@
         {
             "id": 3,
             "titolo": "Tastiera",
-            "immagine": "",
+            "immagine": "img/keyboard.png",
             "descrizione": "tastiera QWERTY layout italiano",
             "quantita": 15,
             "prezzo": 10.99
