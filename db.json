@@ -1,28 +1,28 @@
 {
     "listino": [
         {
-            "id": "1",
-            "titolo": "aaa",
+            "id": 1,
+            "titolo": "Monitor",
             "immagine": "",
-            "descrizione": "aaaaa",
+            "descrizione": "24 pollici, risoluzione FHD, 60 Hz",
             "quantita": 30,
-            "prezzo": 55.99
+            "prezzo": 77.99
         },
         {
-            "id": "1",
-            "titolo": "bbb",
+            "id": 2,
+            "titolo": "Mouse",
             "immagine": "",
-            "descrizione": "bbbb",
+            "descrizione": "USB, 3 bottoni con rotellina di scorrimento",
             "quantita": 25,
-            "prezzo": 30.99
+            "prezzo": 6.99
         },
         {
-            "id": "1",
-            "titolo": "ccc",
+            "id": 3,
+            "titolo": "Tastiera",
             "immagine": "",
-            "descrizione": "cccc",
-            "quantita": 5,
-            "prezzo": 20.99
+            "descrizione": "tastiera QWERTY layout italiano",
+            "quantita": 15,
+            "prezzo": 10.99
         }
     ]
 }
