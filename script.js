@@ -39,24 +39,40 @@ async function startApp() {
                 id: Number(id),
                 quantity: Number(customerQuantity)
             };
-
-            // cerco il prodotto nella lista
+            // cerco il prodotto nel carrello
             let found = false;
             for (let it of basket) {
                 if (it.id === item.id) {
                     // elemento già presente: aggiorno la quantità
                     found = true;
-                    it.quantity += item.quantity;
+                    for (let i of db.listino) {
+                        if (i.id === item.id && i.quantita >= item.quantity) {
+                            // aggiorna carrello
+                            it.quantity += item.quantity;
+                            // aggiorna listino
+                            i.quantita -= item.quantity;
+                        }
+                    }
                     break;
                 }
             }
             if (!found) {
                 // elemento non presente: lo inserisco nel carrello
-                basket.push(item);
+                for (let i of db.listino) {
+                    if (i.id === item.id && i.quantita >= item.quantity) {
+                        // aggiorna carrello
+                        basket.push(item);
+                        // aggiorna listino
+                        i.quantita -= item.quantity;
+                    }
+                }
             }
+            console.log("--- basket ---");
+            console.log(basket);
+            console.log("--- listino ---");
+            console.log(db.listino);
         });
     });
-
 }
 
 // legge i dati dal database json
