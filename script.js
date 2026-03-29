@@ -11,19 +11,19 @@ startApp();
 // inizializza l'applicazione
 async function startApp() {
     const db = await loadDatabase();
-    for (let articolo of db.listino) {
-        const item = document.createElement("div");
-        item.innerHTML = `
-            <img src="${articolo.immagine}" width="200" height="100">
-            <p id="title-${articolo.id}">${articolo.titolo}</p>
-            <p id="description-${articolo.id}">Descrizione: ${articolo.descrizione}</p>
-            <p id="quantity-${articolo.id}">Quantità: ${articolo.quantita}</p>
-            <p id="price-${articolo.id}"id="title-${articolo.id}">Prezzo: ${articolo.prezzo} €</p>
-            <input type="number" id="customerQuantity-${articolo.id}" min="0" max="${articolo.quantita}">
-            <button id="addToBasket-${articolo.id}">Aggiugi al carrello</button>
+    for (let item of db.catalog) {
+        const div = document.createElement("div");
+        div.innerHTML = `
+            <img src="${item.picture}" width="200" height="100">
+            <p id="title-${item.id}">${item.title}</p>
+            <p id="description-${item.id}">Descrizione: ${item.description}</p>
+            <p id="quantity-${item.id}">Quantità: ${item.quantity}</p>
+            <p id="price-${item.id}"id="title-${item.id}">Prezzo: ${item.price} €</p>
+            <input type="number" id="customerQuantity-${item.id}" min="0" max="${item.quantity}">
+            <button id="addToBasket-${item.id}">Aggiugi al carrello</button>
             <hr />
         `;
-        productList.append(item);
+        productList.append(div);
     }
 
     const buttons = document.querySelectorAll('main button');
@@ -37,6 +37,7 @@ async function startApp() {
             const customerQuantity = document.getElementById(`customerQuantity-${id}`).value;
             const item = {
                 id: Number(id),
+                title: document.getElementById(`title-${id}`).innerText,
                 quantity: Number(customerQuantity)
             };
             // cerco il prodotto nel carrello
@@ -45,12 +46,12 @@ async function startApp() {
                 if (it.id === item.id) {
                     // elemento già presente: aggiorno la quantità
                     found = true;
-                    for (let i of db.listino) {
-                        if (i.id === item.id && i.quantita >= item.quantity) {
+                    for (let i of db.catalog) {
+                        if (i.id === item.id && i.quantity >= item.quantity) {
                             // aggiorna carrello
                             it.quantity += item.quantity;
-                            // aggiorna listino
-                            i.quantita -= item.quantity;
+                            // aggiorna catalog
+                            i.quantity -= item.quantity;
                         }
                     }
                     break;
@@ -58,22 +59,27 @@ async function startApp() {
             }
             if (!found) {
                 // elemento non presente: lo inserisco nel carrello
-                for (let i of db.listino) {
-                    if (i.id === item.id && i.quantita >= item.quantity) {
+                for (let i of db.catalog) {
+                    if (i.id === item.id && i.quantity >= item.quantity) {
                         // aggiorna carrello
                         basket.push(item);
-                        // aggiorna listino
-                        i.quantita -= item.quantity;
+                        // aggiorna catalog
+                        i.quantity -= item.quantity;
                     }
                 }
             }
             // aggiorna quantità nell'HTML
-            for (let i of db.listino) {
+            for (let i of db.catalog) {
                 if (i.id === item.id) {
-                    document.getElementById(`quantity-${item.id}`).innerText = `Quantità: ${i.quantita}`;
-                    document.getElementById(`customerQuantity-${item.id}`).setAttribute("max", i.quantita);
+                    document.getElementById(`quantity-${item.id}`).innerText = `Quantità: ${i.quantity}`;
+                    document.getElementById(`customerQuantity-${item.id}`).setAttribute("max", i.quantity);
                 }
             }
+
+            // salva carrello e catalog
+            console.log(JSON.stringify(basket));
+            localStorage.setItem("userBasket", JSON.stringify(basket));
+            localStorage.setItem("updatedCatalog", JSON.stringify(db.catalog));
         });
     });
 }
